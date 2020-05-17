@@ -11,7 +11,6 @@ html {
 }
 a {
     text-decoration: none;
-    cursor: pointer;
 }
 a:active {
     border: 2px solid #B8FFEC;
@@ -23,7 +22,7 @@ button:focus, a:focus {
     background-color: white;
     outline: none;
 }
-button {
+a, button {
     cursor: pointer;
 }
 ul, li {
@@ -37,6 +36,43 @@ ul, li {
     color: #1B1C21;
     padding: 0;
     margin: 0;
+}
+.image-link {
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    display: block;
+    transition: opacity .3s;
+}
+.image-link:hover {
+    opacity: .3;
+}
+.image-link:focus {
+    background-size: 100%;
+}
+.image-link_menu {
+    background-image: url(../img/header/menu.svg);
+}
+.image-link_phone {
+    background-image: url(../img/header/call.svg);
+}
+.image-link_chat {
+    background-image: url(../img/header/chat.svg);
+}
+.image-link_contacts {
+    background-image: url(../img/header/profile.svg);
+}
+.image-link_repair {
+    background-image: url(../img/header/repair.svg);
+}
+.image-link_search {
+    background-image: url(../img/header/checkstatus.svg);
+}
+.text-link {
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.2px;
+    color: #1B1C21;
 }
 .services {
     max-width: 1120px;
@@ -55,33 +91,21 @@ ul, li {
     padding: 19px 16px;
     background-color: white;
 }
-.header__link {
-    width: 40px;
-    height: 40px;
-    background-color: transparent;
-    display: block;
-}
 .header__link_logo {
     margin-right: 16.73px;
+    border: 2px solid transparent;
 }
 .header__link_phone {
-    background-image: url(../img/header/call.svg);
     display: none;
 }
 .header__link_chat {
-    background-image: url(../img/header/chat.svg);
     display: none;
 }
 .header__link_contacts {
-    background-image: url(../img/header/profile.svg);
     display: none;
 }
 .header__link_repair {
-    background-image: url(../img/header/repair.svg);
     margin-right: 16px;
-}
-.header__link_search {
-    background-image: url(../img/header/checkstatus.svg);
 }
 .header__logo-delimiter {
     display: none;
@@ -91,8 +115,13 @@ ul, li {
     align-items: center;
     justify-content: space-between;
 }
+.header__logo-image {
+    transition: opacity .3s;
+}
+.header__logo-image:hover {
+    opacity: .3;
+}
 .header__menu-icon {
-    background-image: url(../img/header/menu.svg);
     margin-right: 16.73px;
 }
 .header__links-delimiter {
@@ -123,15 +152,13 @@ ul, li {
 }
 .title-links__link {
     background-color: transparent;
-    font-size: 16px;
-    line-height: 24px;
-    letter-spacing: -0.2px;
     font-family: 'TT Lakes';
     font-weight: 500;
     background-repeat: no-repeat;
     background-position: 99% center;
     height: 40px;
     padding-right: 48px;
+    transition: opacity .3s;
 }
 .title-links__link:hover {
     opacity: .3;
@@ -152,9 +179,6 @@ ul, li {
     margin-bottom: 24px;
 }
 .links__link {
-    font-size: 16px;
-    line-height: 24px;
-    letter-spacing: -0.2px;
     color: #7E7E82;
     padding: 8px 16px;
     border: 2px solid transparent;
@@ -174,9 +198,6 @@ ul, li {
 }
 .services__more {
     background-color: transparent;
-    font-size: 16px;
-    line-height: 24px;
-    letter-spacing: -0.2px;
     background-image: url(../img/description/expand.svg);
     background-repeat: no-repeat;
     background-position: center left;
@@ -184,12 +205,120 @@ ul, li {
     margin-left: 8px;
     margin-bottom: 16px;
     margin-top: 16px;
+    border: 2px solid transparent;    
+    position: relative;
 }
-.services__more:hover {
-    opacity: .3;
+.services__more::before {
+    content: '';
+    width: 0;
+    height: 2px;
+    background-color: #41F6D7;
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    transition: width 1s;
+}
+.services__more:hover::before {
+    width: 100%;
 }
 .description__image {
     width: 100%;
+}
+.main-nav {
+    box-shadow: 16px 0px 52px rgba(14, 24, 80, 0.2), -2px 0px 4px rgba(69, 79, 126, 0.02);
+    position: absolute;
+    width: 320px;
+    padding-bottom: 32px;
+}
+.main-nav__header-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18.73px 24px 46px 24px;
+}
+.main-nav__logo-wrapper {
+    display: flex;
+    align-items: center;
+}
+.main-nav__close {
+    background-image: url(../img/main-nav/close.svg);
+    margin-right: 16.73px;
+}
+.main-nav__logo-link {
+    border: 2px solid transparent;
+    transition: opacity .3s;
+}
+.main-nav__logo-link:hover {
+    opacity: .3;
+}
+.main-nav__search {
+    background-image: url(../img/main-nav/search.svg);
+}
+.main-nav__links {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 265px;
+}
+.main-nav__link {
+    height: 32px;
+    line-height: 32px;
+    padding-left: 24px;
+    color: #1B1C21;
+    display: block;
+}
+.main-nav__link:not(:last-child) {
+    margin-bottom: 20px;
+}
+.main-nav__link_phone {
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: -0.6px;
+    font-family: 'TT Lakes';
+    font-weight: bold;
+}
+.main-nav__link_active {
+    background-image: url(../img/title/highlight.svg);
+    background-position: center left;
+    background-repeat: no-repeat;
+    color: #7E7E82;
+}
+.main-nav__contacts-links {
+    padding-left: 24px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin-bottom: 16px;
+}
+.main-nav__contacts-link_phone, .main-nav__contacts-link_chat {
+    margin-right: 16px;
+}
+.main-nav__link_text {
+    position: relative;
+}
+.main-nav__link_text::before {
+    content: '';
+    width: 0;
+    height: 2px;
+    background-color: #41F6D7;
+    position: absolute;
+    bottom: -3px;
+    transition: width 1s;
+}
+.main-nav__link_text:hover::before{
+    width: 100%;
+}
+.main-nav__lang-links {
+    margin-top: 40px;
+    padding-left: 24px;
+}
+.main-nav__lang-link {
+    display: inline-block;
+}
+.main-nav__lang-link:not(:last-child) {
+    margin-right: 7px;
+}
+.main-nav__lang-link:hover {
+    color: #7E7E82;
 }
 @media all and (min-width: 768px) {
     .header {
@@ -223,6 +352,7 @@ ul, li {
     }
     .title-wrapper {
         padding: 24px 24px 32px 24px;
+        background-position: 0 42%;
     }
     .links {
         padding: 0 24px;
