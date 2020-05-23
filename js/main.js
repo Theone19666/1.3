@@ -31,6 +31,11 @@ window.addEventListener('DOMContentLoaded', () => {
             item.classList.add('hidden');
         });
     }
+    if (window.innerWidth >= 1120) {
+        document.querySelectorAll('.brand:not(:nth-child(-n+8))').forEach((item) => {
+            item.classList.add('hidden');
+        });
+    }
 });
 
 document.addEventListener('click', (event) => {
@@ -47,6 +52,21 @@ document.addEventListener('click', (event) => {
                 repairButton.textContent = 'Скрыть';
                 repairButton.classList.add('more-button_hide');
                 document.querySelectorAll('.brand:not(:nth-child(-n+6))').forEach((item) => {
+                    item.classList.remove('hidden');
+                });
+            }
+        }
+        if ( window.innerWidth >= 1120) { 
+            if (repairButton.classList.contains('more-button_hide')) {
+                repairButton.textContent = 'Показать всё';
+                repairButton.classList.remove('more-button_hide');
+                document.querySelectorAll('.brand:not(:nth-child(-n+8))').forEach((item) => {
+                    item.classList.add('hidden');
+                });
+            } else {
+                repairButton.textContent = 'Скрыть';
+                repairButton.classList.add('more-button_hide');
+                document.querySelectorAll('.brand:not(:nth-child(-n+8))').forEach((item) => {
                     item.classList.remove('hidden');
                 });
             }
