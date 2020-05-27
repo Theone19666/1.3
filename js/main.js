@@ -12,10 +12,54 @@ function createSwiper() {
     });
 }
 
+function hideBrands(brandsCount = 6) {
+    document.querySelectorAll(`.brand:not(:nth-child(-n+${ brandsCount }))`).forEach((item) => {
+        item.classList.add('hidden');
+    });
+}
+
+function showBrands(brandsCount = 6) {
+    document.querySelectorAll(`.brand:not(:nth-child(-n+${ brandsCount }))`).forEach((item) => {
+        item.classList.remove('hidden');
+    });
+}
+
+function showFirstBrands(brandsCount = 8) {
+    document.querySelectorAll(`.brand:nth-child(-n+${ brandsCount })`).forEach((item) => {
+        item.classList.remove('hidden');
+    });
+}
+
+function hideButtonShowBrands({ brandsCount = 6, repairButton = {} } = {}) {
+    repairButton.textContent = 'Скрыть';
+    repairButton.classList.add('more-button_hide');
+    showBrands(brandsCount);
+}
+
+function showButtonHideBrands({ brandsCount = 6, repairButton } = {}) {
+    repairButton.textContent = 'Показать всё';
+    repairButton.classList.remove('more-button_hide');
+    hideBrands(brandsCount);
+}
+
+function deleteSwiperStyle() {
+    document.querySelectorAll('.brand').forEach((item) => {
+        item.style.width = '';
+    });
+}
+
 window.addEventListener('resize', () => {
     if (window.innerWidth >= 768) {
+        deleteSwiperStyle();
         if(swiperInstance) {
-            swiperInstance.destroy(true, true);
+            swiperInstance.destroy(true);
+        }
+        if (window.innerWidth < 1120) {
+            //showBrands();
+            hideBrands();
+        } else {
+            showFirstBrands();
+            hideBrands(8);
         }
     } else {
         createSwiper();
@@ -27,14 +71,10 @@ window.addEventListener('DOMContentLoaded', () => {
         createSwiper();
     }
     if (window.innerWidth >= 768 && window.innerWidth < 1120) {
-        document.querySelectorAll('.brand:not(:nth-child(-n+6))').forEach((item) => {
-            item.classList.add('hidden');
-        });
+        hideBrands();
     }
     if (window.innerWidth >= 1120) {
-        document.querySelectorAll('.brand:not(:nth-child(-n+8))').forEach((item) => {
-            item.classList.add('hidden');
-        });
+        hideBrands(8);
     }
 });
 
@@ -43,32 +83,16 @@ document.addEventListener('click', (event) => {
     if (repairButton) {
         if (window.innerWidth >= 768 && window.innerWidth < 1120) { 
             if (repairButton.classList.contains('more-button_hide')) {
-                repairButton.textContent = 'Показать всё';
-                repairButton.classList.remove('more-button_hide');
-                document.querySelectorAll('.brand:not(:nth-child(-n+6))').forEach((item) => {
-                    item.classList.add('hidden');
-                });
+                showButtonHideBrands({ repairButton });
             } else {
-                repairButton.textContent = 'Скрыть';
-                repairButton.classList.add('more-button_hide');
-                document.querySelectorAll('.brand:not(:nth-child(-n+6))').forEach((item) => {
-                    item.classList.remove('hidden');
-                });
+                hideButtonShowBrands({ repairButton });
             }
         }
         if ( window.innerWidth >= 1120) { 
             if (repairButton.classList.contains('more-button_hide')) {
-                repairButton.textContent = 'Показать всё';
-                repairButton.classList.remove('more-button_hide');
-                document.querySelectorAll('.brand:not(:nth-child(-n+8))').forEach((item) => {
-                    item.classList.add('hidden');
-                });
+                showButtonHideBrands({ brandsCount: 8, repairButton });
             } else {
-                repairButton.textContent = 'Скрыть';
-                repairButton.classList.add('more-button_hide');
-                document.querySelectorAll('.brand:not(:nth-child(-n+8))').forEach((item) => {
-                    item.classList.remove('hidden');
-                });
+                hideButtonShowBrands({ brandsCount: 8, repairButton });
             }
         }
     }
