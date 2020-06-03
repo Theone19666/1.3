@@ -245,13 +245,10 @@ li {
   border: 2px solid transparent;
   position: relative;
 }
-.more-button_hide {
-  /* background-image: url(../img/description/hide.svg); */
-}
 .more-button::after {
   content: url(../img/description/expand.svg);
   position: absolute;
-  left: 0;
+  left: 5px;
   top: 0;
   transition: transform 0.3s;
 }
@@ -270,6 +267,9 @@ li {
 }
 .more-button:hover::before {
   width: 100%;
+}
+.more-button:focus {
+  padding-right: 5px;
 }
 .description__image {
   width: 100%;
